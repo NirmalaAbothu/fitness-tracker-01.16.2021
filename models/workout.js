@@ -1,5 +1,7 @@
+// Requiring necessary npm packages
 const mongoose = require("mongoose");
 
+// ODM schema
 const Schema = mongoose.Schema;
 
 const WorkoutSchema = new Schema({

@@ -1,24 +1,11 @@
+// require express router
 const router = require("express").Router();
-// Import the models to use its database functions.
+
+// require models to use its database functions.
 var db = require("../models");
-// const mongojs = require("mongojs");
-// const mongoose = require("mongoose");
 
-// api routes
-// module.export = function (app) {
-// router.get("/api/workouts", (req, res) => {
-//      db.Workout.find({})
-//           .then((dbWorkout) => {
-//                console.log(dbWorkout);
-//                res.json(dbWorkout);
-//           })
-//           .catch((err) => {
-//                console.log(err);
-//                res.status(500).json(err);
-//           });
-// });
-
-//
+//get all workouts on page load
+// ===========================================
 
 router.get("/api/workouts", (req, res) => {
      db.Workout.aggregate([
@@ -41,9 +28,9 @@ router.get("/api/workouts", (req, res) => {
           });
 });
 
-// 1. create workout to the database's collection
-// POST:
+// create workout to the database's collection
 // ===========================================
+
 router.post("/api/workouts", ({ body }, res) => {
      db.Workout.create(body)
           .then((dbWorkout) => {
@@ -56,9 +43,8 @@ router.post("/api/workouts", ({ body }, res) => {
           });
 });
 
-// 4. Update one workout in the database's collection by it's ObjectId
-
-// POST: /update/:id
+// Update one workout in the database's collection by it's Id
+// ===========================================
 
 router.put("/api/workouts/:id", (req, res) => {
      db.Workout.findOneAndUpdate(
@@ -75,6 +61,7 @@ router.put("/api/workouts/:id", (req, res) => {
           });
 });
 
+// get the total duration of each workout from the last seven workouts
 // ================================================================
 
 router.get("/api/workouts/range", (req, res) => {
